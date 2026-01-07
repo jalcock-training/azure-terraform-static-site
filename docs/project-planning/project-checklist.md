@@ -1,214 +1,108 @@
-Static Website Project — Full Engineering Checklist
-===================================================
+Static Website Project — Engineering Checklist
+==============================================
 
-A complete, end-to-end task list for building a professional, Azure Static Web App project with Terraform.
+A structured, end-to-end plan for delivering an Azure Static Web App using Terraform and GitHub Actions.
 
 ---------------------------------------------------
-PHASE 1 — Project Initialization
+PHASE 1 — Project Foundation
 ---------------------------------------------------
 
-[ ] 1. Create the GitHub Repository
-    [ ] Create new public repo
-    [ ] Add .gitignore
-    [ ] Add LICENSE
-    [ ] Add README.md (initial placeholder)
+[ ] Repository initialization
+    [x] Create public repo
+    [x] Add .gitignore, LICENSE, README
     [ ] Add .editorconfig
+    [x] Establish base folder structure
+    [x] Enable Issues and PRs
 
-[ ] 2. Set Up Repo Structure
-    [ ] Create /src
-    [ ] Create /infra
-    [ ] Create /docs
-    [ ] Create /.github/workflows
-    [ ] Create /test (optional)
-
-[ ] 3. Enable GitHub Features
-    [ ] Enable Issues
-    [ ] Create Project board (Kanban)
-    [ ] Add Milestones (optional)
-    [ ] Configure branch protection rules for main
-    [ ] Require PR reviews
+[ ] Workflow governance
+    [x] Configure branch protection for main
+    [x] Require PR reviews
+    [ ] Add PR template
+    [ ] Add Issue templates
+    [x] Create Project board (Kanban)
 
 ---------------------------------------------------
-PHASE 2 — Local Development Environment
+PHASE 2 — Architecture & Documentation
 ---------------------------------------------------
 
-[ ] 4. Configure VSCodium Environment
-    [ ] Install Terraform extension
-    [ ] Install Prettier / ESLint
-    [ ] Install Markdown lint
-    [ ] Install GitHub Actions extension
+[ ] Architecture definition
+    [ ] High-level architecture diagram
+    [ ] Terraform workflow diagram
+    [ ] CI/CD pipeline diagram
 
-[ ] 5. Optional: Dev Container
-    [ ] Add .devcontainer/devcontainer.json
-    [ ] Include Terraform
-    [ ] Include Node
-    [ ] Include Azure CLI
-    [ ] Include pre-commit hooks
-
-[ ] 6. Install Local Tooling
-    [ ] Install Terraform
-    [ ] Install TFLint
-    [ ] Install tfsec
-    [ ] Install terraform-docs
-    [ ] Install pre-commit
-    [ ] Install Node.js (if needed)
-
----------------------------------------------------
-PHASE 3 — Planning & Documentation
----------------------------------------------------
-
-[ ] 7. Define Project Scope
-    [ ] Static website
-    [ ] Azure Static Web Apps (Free)
-    [ ] Terraform IaC
-    [ ] GitHub Actions CI/CD
-    [ ] Optional: local container testing
-
-[ ] 8. Create Architecture Diagram
-    [ ] Azure Static Web App
-    [ ] GitHub Actions
-    [ ] Terraform workflow
-    [ ] Optional: Terraform backend
-
-[ ] 9. Add Documentation
+[ ] Documentation
     [ ] /docs/architecture.md
-    [ ] /docs/decisions/adr-001-hosting-choice.md
     [ ] /docs/ci-cd.md
     [ ] /docs/terraform-module.md
+    [ ] ADR: hosting choice
+    [ ] ADR: Terraform structure
 
 ---------------------------------------------------
-PHASE 4 — Git Workflow Setup
+PHASE 3 — Static Website
 ---------------------------------------------------
 
-[ ] 10. Branching Strategy
-     [ ] main = production
-     [ ] dev (optional)
-     [ ] feature/<name> branches
-     [ ] fix/<name> branches
+[ ] Website scaffold
+    [ ] Choose framework (HTML/CSS, Astro, Hugo, etc.)
+    [ ] Implement initial layout
+    [ ] Add content
 
-[ ] 11. Add PR Templates
-     [ ] .github/pull_request_template.md
-
-[ ] 12. Add Issue Templates
-     [ ] Bug report template
-     [ ] Feature request template
+[ ] Quality controls
+    [ ] Add formatting/linting (Prettier, markdownlint)
+    [ ] Add basic tests (optional)
 
 ---------------------------------------------------
-PHASE 5 — Website Development
+PHASE 4 — Terraform Infrastructure
 ---------------------------------------------------
 
-[ ] 13. Build the Static Site
-     [ ] Choose framework (HTML/CSS, Astro, Next.js static, Hugo, Jekyll)
-     [ ] Implement initial layout
-     [ ] Add content
+[ ] Terraform module
+    [ ] main.tf
+    [ ] variables.tf
+    [ ] outputs.tf
+    [ ] versions.tf
 
-[ ] 14. Add Linting & Formatting
-     [ ] Prettier
-     [ ] ESLint (if JS)
-     [ ] markdownlint
+[ ] Infrastructure best practices
+    [ ] Add linting/security scanning to CI (tflint, tfsec)
+    [ ] Add terraform-docs generation
+    [ ] Add terraform fmt enforcement
 
-[ ] 15. Add Basic Tests (Optional)
-     [ ] HTML validation
-     [ ] JS unit tests (if applicable)
-
----------------------------------------------------
-PHASE 6 — Terraform Infrastructure
----------------------------------------------------
-
-[ ] 16. Create Terraform Module
-     [ ] main.tf
-     [ ] variables.tf
-     [ ] outputs.tf
-     [ ] versions.tf
-
-[ ] 17. Add Terraform Best Practices
-     [ ] terraform fmt
-     [ ] tflint
-     [ ] tfsec
-     [ ] terraform-docs generation
-     [ ] Pre-commit hooks
-
-[ ] 18. Local Terraform Validation
-     [ ] terraform init
-     [ ] terraform validate
-     [ ] terraform plan
+[ ] Validation
+    [ ] terraform init
+    [ ] terraform validate
+    [ ] terraform plan
 
 ---------------------------------------------------
-PHASE 7 — CI/CD Setup
+PHASE 5 — CI/CD Automation
 ---------------------------------------------------
 
-[ ] 19. GitHub Actions for Static Site
-     [ ] Build site
-     [ ] Run linting/tests
-     [ ] Deploy to Azure Static Web Apps
+[ ] Static site pipeline
+    [ ] Build site
+    [ ] Run linting/tests
+    [ ] Deploy to Azure Static Web Apps
 
-[ ] 20. GitHub Actions for Terraform
-     [ ] terraform fmt
-     [ ] tflint
-     [ ] tfsec
-     [ ] terraform validate
-     [ ] Optional: plan on PR, apply on merge
+[ ] Terraform pipeline
+    [ ] terraform fmt
+    [ ] tflint
+    [ ] tfsec
+    [ ] terraform validate
+    [ ] Optional: plan on PR, apply on merge
 
-[ ] 21. Configure Secrets
-     [ ] Azure deployment token
-     [ ] Optional: Terraform backend credentials
-
----------------------------------------------------
-PHASE 8 — Deployment
----------------------------------------------------
-
-[ ] 22. Deploy Infrastructure
-     [ ] terraform apply
-
-[ ] 23. Deploy Static Website
-     [ ] GitHub Actions triggers on push to main
-
-[ ] 24. Validate Deployment
-     [ ] Check site loads
-     [ ] Check SSL
-     [ ] Check custom domain (optional)
+[ ] Secrets
+    [ ] Azure deployment token
+    [ ] Optional: backend credentials
 
 ---------------------------------------------------
-PHASE 9 — Polish & Recruiter Readiness
+PHASE 6 — Deployment & Validation
 ---------------------------------------------------
 
-[ ] 25. Add Screenshots
-     [ ] Homepage
-     [ ] GitHub Actions passing
-     [ ] Architecture diagram
-
-[ ] 26. Finalize README
-     [ ] Overview
-     [ ] Architecture diagram
-     [ ] Tech stack
-     [ ] CI/CD explanation
-     [ ] Terraform module details
-     [ ] Deployment instructions
-     [ ] What you learned
-
-[ ] 27. Add Tags & Topics
-     [ ] terraform
-     [ ] azure
-     [ ] static-website
-     [ ] iac
-     [ ] github-actions
-
-[ ] 28. Clean Commit History
-     [ ] Squash unnecessary commits
-     [ ] Ensure conventional commit style
+[ ] Deploy infrastructure
+[ ] Deploy static site
+[ ] Validate deployment (SSL, domain, availability)
 
 ---------------------------------------------------
-PHASE 10 — Optional Enhancements
+PHASE 7 — Polish
 ---------------------------------------------------
 
-[ ] Automated Testing
-     [ ] Lighthouse CI
-     [ ] HTML validator
-
-[ ] Makefile
-     [ ] make build
-     [ ] make deploy
-     [ ] make test
-
-[ ] Optional CDN
-     [ ] Azure CDN (not free)
+[ ] Add screenshots (site, pipelines, diagrams)
+[ ] Finalize README
+[ ] Add GitHub topics/tags
+[ ] Clean commit history (squash, conventional commits)
