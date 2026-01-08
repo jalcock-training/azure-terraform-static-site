@@ -21,7 +21,7 @@ PHASE 1 — Project Foundation
     [x] Add Issue templates
     [x] Create Project board (Kanban)
 
----------------------------------------------------X
+---------------------------------------------------
 PHASE 2 — Architecture & Documentation
 ---------------------------------------------------
 
@@ -41,14 +41,14 @@ PHASE 2 — Architecture & Documentation
 PHASE 3 — Static Website
 ---------------------------------------------------
 
-[ ] Website scaffold
-    [ ] Choose framework (HTML/CSS, Astro, Hugo, etc.)
-    [ ] Implement initial layout
-    [ ] Add content
+[x] Website scaffold
+    [x] Choose framework (HTML/CSS, Astro, Hugo, etc.)
+    [x] Implement initial layout
+    [x] Add content
 
-[ ] Quality controls
-    [ ] Add formatting/linting (Prettier, markdownlint)
-    [ ] Add basic tests (optional)
+[x] Quality controls
+    [x] Add formatting/linting (Prettier, markdownlint)
+    [x] Add basic tests (optional)
 
 ---------------------------------------------------
 PHASE 4 — Terraform Infrastructure
