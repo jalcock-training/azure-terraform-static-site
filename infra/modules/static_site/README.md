@@ -1,0 +1,150 @@
+# Azure Static Website Module
+
+This Terraform module deploys a complete Azure Static Website environment, including:
+
+- Resource Group
+- Storage Account
+- Static Website configuration
+- Optional CDN Profile + Endpoint (disabled by default)
+
+The module is designed to be self‑contained, secure by default, and easy to consume in both small demos and larger infrastructure stacks.
+
+---
+
+## Features
+
+- Creates a fully functional Azure Static Website
+- Secure defaults (`allow_blob_public_access = false`)
+- Optional CDN integration (`enable_cdn = true`)
+- Consistent tagging across all resources
+- Clean naming conventions
+- Minimal required inputs
+- Outputs suitable for CI/CD and deployment automation
+
+---
+
+## Usage
+
+```hcl
+module "static_site" {
+  source = "../modules/static_site"
+
+  resource_group_name = "rg-demo-static"
+  location            = "australiaeast"
+  site_name           = "demosite123"
+
+  tags = {
+    environment = "dev"
+    project     = "static-site"
+  }
+
+  # Optional CDN
+  enable_cdn = false
+}
+
+---
+
+## Inputs
+
+| Name                | Type          | Default        | Description                                                                 |
+|---------------------|---------------|----------------|-----------------------------------------------------------------------------|
+| resource_group_name | string        | n/a            | Name of the resource group to create.                                       |
+| location            | string        | n/a            | Azure region for all resources.                                             |
+| site_name           | string        | n/a            | Base name for the static site resources. Must be globally unique.           |
+| tags                | map(string)   | {}             | Tags applied to all resources.                                              |
+| index_document      | string        | "index.html"   | Name of the index document.                                                 |
+| error_document      | string        | "404.html"     | Name of the error document.                                                 |
+| enable_cdn          | bool          | false          | Whether to deploy a CDN Profile + Endpoint.                                 |
+
+---
+
+## Outputs
+
+| Name                 | Description                                               |
+|----------------------|-----------------------------------------------------------|
+| resource_group_name  | The name of the created resource group.                   |
+| storage_account_name | The name of the storage account hosting the static site.  |
+| static_website_url   | The primary web endpoint for the static website.          |
+| cdn_endpoint_url     | The CDN endpoint URL (if CDN is enabled).                 |
+
+---
+
+## Architecture
+
+### Without CDN (default)
+
+Azure Resource Group
+└── Storage Account
+    └── Static Website ($web)
+
+
+### With CDN enabled
+
+Azure Resource Group
+├── Storage Account
+│   └── Static Website ($web)
+└── CDN Profile
+    └── CDN Endpoint → Origin: Static Website
+
+---
+
+## Security Notes
+
+- `allow_blob_public_access` is set to `false` for security best practices.
+  Static website hosting does **not** require public blob access.
+- CDN is disabled by default to avoid unnecessary cost.
+- All resources support tagging for governance, cost management, and auditability.
+- Storage account names are sanitized to meet Azure naming rules and avoid accidental exposure.
+- No secrets or access keys are output by the module.
+
+---
+
+## Naming Conventions
+
+The module uses the provided `site_name` as the base for:
+
+- Storage account name (sanitized to meet Azure requirements)
+- CDN profile name (if enabled)
+- CDN endpoint name (if enabled)
+
+This ensures consistent, predictable naming across environments.
+
+---
+
+## Requirements
+
+- Terraform `>= 1.5.0`
+- AzureRM provider `~> 4.0`
+
+---
+
+## Example With CDN Enabled
+
+module "static_site" {
+  source = "../modules/static_site"
+
+  resource_group_name = "rg-demo-static"
+  location            = "australiaeast"
+  site_name           = "demosite123"
+
+  enable_cdn = true
+}
+
+---
+
+## Future Enhancements (Optional)
+
+- Support for custom domains and HTTPS (Azure CDN-managed certificates)
+- Diagnostic settings for Storage Account and CDN
+- Logging and access analytics
+- Private endpoints for secure internal hosting
+- Role assignments for CI/CD pipelines or automation identities
+- CDN Rules Engine configuration (redirects, caching rules, security headers)
+- Optional WAF-enabled CDN SKU
+- Integration with Azure Front Door as an alternative delivery option
+- Module-level naming convention overrides
+
+## License
+
+See repository LICENCE file.
+```
