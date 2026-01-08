@@ -1,9 +1,9 @@
 ---
 name: Task
 about: A focused engineering task or work item
-title: ""
-labels: ["task"]
-assignees: ""
+title: ''
+labels: ['task']
+assignees: ''
 ---
 
 # Summary

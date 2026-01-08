@@ -16,11 +16,11 @@ The solution consists of three major components:
 
 3. **CI/CD Pipeline (GitHub Actions)**  
    Automated workflows for:
-   - Building and deploying the static site  
-   - Running Terraform linting, validation, and optional plan/apply  
-   - Enforcing formatting and security checks  
+   - Building and deploying the static site
+   - Running Terraform linting, validation, and optional plan/apply
+   - Enforcing formatting and security checks
 
-### Diagram
+### Diagram - High-Level Architecture
 
                           +-----------------------------+
                           |         GitHub Repo         |
@@ -68,24 +68,23 @@ The solution consists of three major components:
                           |  content from global edge   |
                           +-----------------------------+
 
-
 ---
 
 ## 2. Azure Static Web App Architecture
 
 Azure Static Web Apps provides:
 
-- Global distribution via Azure Front Door  
-- Automatic SSL certificates  
-- GitHub Actions integration  
-- Zero‑downtime deployments  
+- Global distribution via Azure Front Door
+- Automatic SSL certificates
+- GitHub Actions integration
+- Zero‑downtime deployments
 - Optional API backend (not used in this project)
 
 ### Key characteristics
 
-- **Static content only** — no server-side compute  
-- **Automatic build and deploy** from GitHub  
-- **Environment separation** via branches (optional)  
+- **Static content only** — no server-side compute
+- **Automatic build and deploy** from GitHub
+- **Environment separation** via branches (optional)
 - **Custom domains** supported (future enhancement)
 
 ---
@@ -103,15 +102,14 @@ infra/
 ├── outputs.tf
 ├── versions.tf
 
-
 ### Responsibilities
 
-- Create Azure Static Web App  
-- Configure SKU, location, and deployment token  
-- Output values for CI/CD integration  
+- Create Azure Static Web App
+- Configure SKU, location, and deployment token
+- Output values for CI/CD integration
 - Enforce formatting, linting, and security scanning via CI
 
-### Diagram
+### Diagram - Terraform Architecture
 
                      +-----------------------------+
                      |        Developer            |
@@ -156,8 +154,6 @@ infra/
                      |  Supporting config          |
                      +-----------------------------+
 
-
-
 ---
 
 ## 4. CI/CD Architecture
@@ -166,20 +162,21 @@ GitHub Actions orchestrates the full deployment lifecycle.
 
 ### Static Site Pipeline
 
-- Install dependencies  
-- Build the site  
-- Run formatting/linting  
-- Deploy to Azure Static Web Apps  
+- Install dependencies
+- Build the site
+- Run formatting/linting
+- Deploy to Azure Static Web Apps
 
 ### Terraform Pipeline
 
-- `terraform fmt`  
-- `tflint`  
-- `tfsec`  
-- `terraform validate`  
-- Optional: `terraform plan` on PR, `apply` on merge  
+- `terraform fmt`
+- `tflint`
+- `tfsec`
+- `terraform validate`
+- Optional: `terraform plan` on PR, `apply` on merge
 
-### Diagram 
+### Diagram - CI/CD Architecture
+
 For the full CI/CD pipeline architecture diagram, see the "CI/CD Pipeline" section in `/docs/architecture.md`.
 
 ---
@@ -188,18 +185,18 @@ For the full CI/CD pipeline architecture diagram, see the "CI/CD Pipeline" secti
 
 This project includes several governance controls:
 
-- **Branch protection** on `main`  
-- **Required PR reviews**  
-- **Small, focused feature branches**  
-- **Conventional commit messages**  
-- **Automated linting and security scanning**  
-- **.editorconfig** for consistent formatting  
+- **Branch protection** on `main`
+- **Required PR reviews**
+- **Small, focused feature branches**
+- **Conventional commit messages**
+- **Automated linting and security scanning**
+- **.editorconfig** for consistent formatting
 
 Future enhancements:
 
-- Add Dependabot  
-- Add CodeQL scanning  
-- Add Terraform state backend with secure credentials  
+- Add Dependabot
+- Add CodeQL scanning
+- Add Terraform state backend with secure credentials
 
 ---
 
@@ -207,11 +204,11 @@ Future enhancements:
 
 This architecture is intentionally minimal but extensible. Planned improvements include:
 
-- Custom domain support  
-- Staging environments  
-- API backend using Azure Functions  
-- CDN rules and caching policies  
-- More advanced Terraform module structure  
+- Custom domain support
+- Staging environments
+- API backend using Azure Functions
+- CDN rules and caching policies
+- More advanced Terraform module structure
 
 ---
 
@@ -219,7 +216,7 @@ This architecture is intentionally minimal but extensible. Planned improvements 
 
 This architecture demonstrates a clean, modern approach to deploying a static website on Azure using Terraform and GitHub Actions. It highlights best practices in:
 
-- Infrastructure as Code  
-- CI/CD automation  
-- Documentation and governance  
-- Cloud-native hosting  
+- Infrastructure as Code
+- CI/CD automation
+- Documentation and governance
+- Cloud-native hosting

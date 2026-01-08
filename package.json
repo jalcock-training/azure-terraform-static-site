@@ -1,0 +1,29 @@
+{
+  "name": "azure-terraform-static-site",
+  "version": "1.0.0",
+  "description": "A static website deployed to Azure using Terraform for full infrastructure-as-code provisioning.   This project demonstrates modern cloud engineering practices including IaC, GitHub Actions CI/CD, and structured repository workflows.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "lint:md": "markdownlint '**/*.md'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalcock-training/azure-terraform-static-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jalcock-training/azure-terraform-static-site/issues"
+  },
+  "homepage": "https://github.com/jalcock-training/azure-terraform-static-site#readme",
+  "devDependencies": {
+    "markdownlint-cli": "^0.47.0",
+    "prettier": "^3.7.4"
+  }
+}
