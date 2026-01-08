@@ -1,6 +1,6 @@
 # Architecture Overview
 
-This document describes the architecture of the Azure Static Web App project, including the hosting model, Terraform structure, CI/CD workflow, and supporting services. It provides a high‑level view for recruiters, engineers, and stakeholders who want to understand how the system is designed and deployed.
+This document describes the architecture of the Azure Static Web App project, including the hosting model, Terraform structure, CI/CD workflow, and supporting services. It provides a high‑level view for engineers and stakeholders who want to understand how the system is designed and deployed.
 
 ---
 
