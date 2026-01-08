@@ -32,7 +32,6 @@ infra/
 ├── outputs.tf
 └── versions.tf
 
-
 ### File Responsibilities
 
 - **main.tf**  
@@ -52,22 +51,22 @@ infra/
 ## 3. High-Level Module Architecture
 
 +--------------------------------------------------------+
-|                 Terraform Module: static-site          |
+| Terraform Module: static-site |
 |--------------------------------------------------------|
-|  Inputs:                                               |
-|   - name                                               |
-|   - location                                           |
-|   - resource_group_name                                |
-|   - sku                                                |
-|                                                        |
-|  main.tf                                               |
-|   - azurerm_static_site                                |
-|   - supporting config                                  |
-|                                                        |
-|  Outputs:                                              |
-|   - static_site_name                                   |
-|   - default_host_name                                  |
-|   - deployment_token                                   |
+| Inputs: |
+| - name |
+| - location |
+| - resource_group_name |
+| - sku |
+| |
+| main.tf |
+| - azurerm_static_site |
+| - supporting config |
+| |
+| Outputs: |
+| - static_site_name |
+| - default_host_name |
+| - deployment_token |
 +--------------------------------------------------------+
 
 ---
@@ -76,19 +75,19 @@ infra/
 
 Below is a typical set of inputs (your actual variables may differ slightly):
 
-| Variable               | Type   | Description                                       |
-|------------------------|--------|---------------------------------------------------|
-| name                   | string | Name of the Static Web App                        |
-| location               | string | Azure region                                      |
-| resource_group_name    | string | Resource group where the app will be deployed     |
-| sku                    | string | Pricing tier (e.g., Free, Standard)               |
+| Variable            | Type   | Description                                   |
+| ------------------- | ------ | --------------------------------------------- |
+| name                | string | Name of the Static Web App                    |
+| location            | string | Azure region                                  |
+| resource_group_name | string | Resource group where the app will be deployed |
+| sku                 | string | Pricing tier (e.g., Free, Standard)           |
 
 Inputs are validated through CI using:
 
-- terraform fmt -check  
-- tflint  
-- tfsec  
-- terraform validate  
+- terraform fmt -check
+- tflint
+- tfsec
+- terraform validate
 
 ---
 
@@ -96,11 +95,11 @@ Inputs are validated through CI using:
 
 The module exposes values required by the CI/CD pipeline:
 
-| Output              | Description                                      |
-|---------------------|--------------------------------------------------|
-| static_site_name    | Name of the deployed Static Web App              |
-| default_host_name   | Public hostname of the app                       |
-| deployment_token    | Token used by GitHub Actions for deployments     |
+| Output            | Description                                  |
+| ----------------- | -------------------------------------------- |
+| static_site_name  | Name of the deployed Static Web App          |
+| default_host_name | Public hostname of the app                   |
+| deployment_token  | Token used by GitHub Actions for deployments |
 
 These outputs allow the static site pipeline to deploy directly to Azure.
 
@@ -109,11 +108,11 @@ These outputs allow the static site pipeline to deploy directly to Azure.
 ## 6. Example Usage
 
 module "static_site" {
-  source              = "./infra/static-site"
-  name                = var.name
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  sku                 = var.sku
+source = "./infra/static-site"
+name = var.name
+location = var.location
+resource_group_name = var.resource_group_name
+sku = var.sku
 }
 
 ---
@@ -124,17 +123,17 @@ The Terraform module is validated and applied through GitHub Actions.
 
 ### Pull Requests
 
-- terraform fmt -check  
-- tflint  
-- tfsec  
-- terraform validate  
-- terraform plan (read-only)  
+- terraform fmt -check
+- tflint
+- tfsec
+- terraform validate
+- terraform plan (read-only)
 
 ### Main Branch
 
-- terraform init  
-- terraform plan  
-- terraform apply  
+- terraform init
+- terraform plan
+- terraform apply
 
 The module’s outputs (especially the deployment token) are consumed by the static site deployment workflow.
 
@@ -144,12 +143,12 @@ The module’s outputs (especially the deployment token) are consumed by the sta
 
 Planned improvements include:
 
-- Azure Storage + Key Vault for remote state  
-- Staging environments  
-- Custom domain support  
-- Azure Functions backend  
-- Monitoring and logging resources  
-- Multi-module structure for larger deployments  
+- Azure Storage + Key Vault for remote state
+- Staging environments
+- Custom domain support
+- Azure Functions backend
+- Monitoring and logging resources
+- Multi-module structure for larger deployments
 
 ---
 

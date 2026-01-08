@@ -1,1 +1,1 @@
-console.log("Static site loaded successfully.");
+console.log('Static site loaded successfully.');

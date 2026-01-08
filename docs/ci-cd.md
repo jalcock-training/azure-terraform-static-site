@@ -34,23 +34,27 @@ Both pipelines run on pull requests and on merges to `main`, with different beha
 ## 3. Static Site Pipeline
 
 ### Trigger Conditions
+
 - Pull requests targeting `main`
 - Pushes to `main`
 
 ### PR Behaviour
-- Install dependencies  
-- Build the static site  
-- Run linters and formatting checks  
+
+- Install dependencies
+- Build the static site
+- Run linters and formatting checks
 - Deploy to an **Azure Static Web Apps preview environment**  
   (isolated environment tied to the PR)
 
 ### Main Branch Behaviour
-- Install dependencies  
-- Build the static site  
-- Deploy to **production** Azure Static Web Apps environment  
+
+- Install dependencies
+- Build the static site
+- Deploy to **production** Azure Static Web Apps environment
 - Zero‑downtime deployment via Azure Front Door
 
 ### Responsibilities
+
 - Ensure the site builds cleanly
 - Provide reviewers with a live preview
 - Deploy automatically after merge
@@ -60,10 +64,12 @@ Both pipelines run on pull requests and on merges to `main`, with different beha
 ## 4. Terraform Pipeline
 
 ### Trigger Conditions
+
 - Pull requests targeting `main`
 - Pushes to `main`
 
 ### PR Behaviour
+
 - `terraform fmt -check`
 - `tflint`
 - `tfsec`
@@ -74,6 +80,7 @@ Both pipelines run on pull requests and on merges to `main`, with different beha
 This ensures infrastructure changes are safe, secure, and reviewable.
 
 ### Main Branch Behaviour
+
 - `terraform init`
 - `terraform plan`
 - `terraform apply`
@@ -81,6 +88,7 @@ This ensures infrastructure changes are safe, secure, and reviewable.
 This applies infrastructure changes automatically after merge.
 
 ### Responsibilities
+
 - Enforce IaC quality and security
 - Prevent misconfigurations from reaching production
 - Provide a clear audit trail for all infrastructure changes
@@ -90,7 +98,6 @@ This applies infrastructure changes automatically after merge.
 ## 5. Pipeline Architecture Diagram
 
 [placeholder]
-
 
 ---
 
@@ -113,11 +120,11 @@ These controls ensure the project remains maintainable, secure, and professional
 
 Planned improvements include:
 
-- CodeQL security scanning  
-- Dependabot for dependency updates  
-- Terraform state backend (Azure Storage + Key Vault)  
-- Staging environments  
-- Canary deployments  
+- CodeQL security scanning
+- Dependabot for dependency updates
+- Terraform state backend (Azure Storage + Key Vault)
+- Staging environments
+- Canary deployments
 - More granular workflows (e.g., docs-only pipeline)
 
 ---
