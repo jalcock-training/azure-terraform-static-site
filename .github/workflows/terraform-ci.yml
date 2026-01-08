@@ -35,7 +35,13 @@ jobs:
       - name: Run TFLint
         run: tflint --recursive
 
-      - name: Run tfsec
-        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.2
+      - name: Run Trivy IaC scan
+        uses: aquasecurity/trivy-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          scan-type: 'fs'
+          scan-ref: '.'
+          scanners: 'misconfig'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+          skip-dirs: '.terraform'
