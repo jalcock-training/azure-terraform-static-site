@@ -10,32 +10,32 @@ PHASE 1 — Project Foundation
 [ ] Repository initialization
     [x] Create public repo
     [x] Add .gitignore, LICENSE, README
-    [ ] Add .editorconfig
+    [x] Add .editorconfig
     [x] Establish base folder structure
     [x] Enable Issues and PRs
 
 [ ] Workflow governance
     [x] Configure branch protection for main
     [x] Require PR reviews
-    [ ] Add PR template
-    [ ] Add Issue templates
+    [x] Add PR template
+    [x] Add Issue templates
     [x] Create Project board (Kanban)
 
----------------------------------------------------
+---------------------------------------------------X
 PHASE 2 — Architecture & Documentation
 ---------------------------------------------------
 
 [ ] Architecture definition
-    [ ] High-level architecture diagram
-    [ ] Terraform workflow diagram
-    [ ] CI/CD pipeline diagram
+    [x] High-level architecture diagram
+    [x] Terraform workflow diagram
+    [x] CI/CD pipeline diagram
 
 [ ] Documentation
-    [ ] /docs/architecture.md
-    [ ] /docs/ci-cd.md
-    [ ] /docs/terraform-module.md
-    [ ] ADR: hosting choice
-    [ ] ADR: Terraform structure
+    [x] /docs/architecture.md
+    [x] /docs/ci-cd.md
+    [x] /docs/terraform-module.md
+    [x] ADR: hosting choice
+    [x] ADR: Terraform structure
 
 ---------------------------------------------------
 PHASE 3 — Static Website
