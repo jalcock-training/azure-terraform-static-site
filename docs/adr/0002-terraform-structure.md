@@ -84,7 +84,6 @@ This provides the right balance between simplicity and scalability. It keeps Pha
 - Easy to extend with additional modules  
 - Terraform code remains organized and maintainable  
 - CI/CD integration is straightforward  
-- Recruiters see a professional, modular IaC structure  
 
 ### Negative
 - Slightly more initial structure than a flat layout  
