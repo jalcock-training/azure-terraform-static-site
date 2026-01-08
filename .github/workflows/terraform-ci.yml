@@ -36,4 +36,6 @@ jobs:
         run: tflint --recursive
 
       - name: Run tfsec
-        uses: aquasecurity/tfsec-action@v2
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
