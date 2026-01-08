@@ -1,11 +1,11 @@
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
-  tags     = var.tags
+  tags     = local.tags
 }
 
 resource "azurerm_storage_account" "sa" {
-  name                     = lower(replace(var.site_name, "/[^a-zA-Z0-9]/", ""))
+  name                     = local.sanitized_site_name
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
@@ -14,7 +14,7 @@ resource "azurerm_storage_account" "sa" {
   # Public blob access is not required for static websites
   allow_blob_public_access = false
 
-  tags = var.tags
+  tags = local.tags
 }
 
 resource "azurerm_storage_account_static_website" "static" {
@@ -29,7 +29,7 @@ resource "azurerm_cdn_profile" "cdn" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   sku                 = "Standard_Microsoft"
-  tags                = var.tags
+  tags                = local.tags
 }
 
 resource "azurerm_cdn_endpoint" "cdn_endpoint" {
@@ -44,5 +44,5 @@ resource "azurerm_cdn_endpoint" "cdn_endpoint" {
     host_name = azurerm_storage_account.sa.primary_web_host
   }
 
-  tags = var.tags
+  tags = local.tags
 }
