@@ -16,5 +16,5 @@ jobs:
           working-dir: infra/modules/static_site/
           output-file: README.md
           output-method: inject
-          git-push: "false"
-          fail-on-diff: "true"
+          git-push: 'false'
+          fail-on-diff: 'true'
