@@ -43,8 +43,9 @@ module "static_site" {
 }
 
 ---
-
+<!-- BEGIN_TF_DOCS -->
 ## Inputs
+
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_enable_cdn"></a> [enable\_cdn](#input\_enable\_cdn) | Whether to deploy a CDN endpoint for the static site. | `bool` | `false` | no |
@@ -55,8 +56,6 @@ module "static_site" {
 | <a name="input_site_name"></a> [site\_name](#input\_site\_name) | Base name for the static site resources. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to all resources. | `map(string)` | `{}` | no |
 
----
-
 ## Outputs
 
 | Name | Description |
@@ -65,6 +64,7 @@ module "static_site" {
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
 | <a name="output_static_website_url"></a> [static\_website\_url](#output\_static\_website\_url) | n/a |
 | <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name) | n/a |
+<!-- END_TF_DOCS -->
 
 ---
 
