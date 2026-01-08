@@ -45,27 +45,26 @@ module "static_site" {
 ---
 
 ## Inputs
-
-| Name                | Type          | Default        | Description                                                                 |
-|---------------------|---------------|----------------|-----------------------------------------------------------------------------|
-| resource_group_name | string        | n/a            | Name of the resource group to create.                                       |
-| location            | string        | n/a            | Azure region for all resources.                                             |
-| site_name           | string        | n/a            | Base name for the static site resources. Must be globally unique.           |
-| tags                | map(string)   | {}             | Tags applied to all resources.                                              |
-| index_document      | string        | "index.html"   | Name of the index document.                                                 |
-| error_document      | string        | "404.html"     | Name of the error document.                                                 |
-| enable_cdn          | bool          | false          | Whether to deploy a CDN Profile + Endpoint.                                 |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_enable_cdn"></a> [enable\_cdn](#input\_enable\_cdn) | Whether to deploy a CDN endpoint for the static site. | `bool` | `false` | no |
+| <a name="input_error_document"></a> [error\_document](#input\_error\_document) | Name of the error document. | `string` | `"404.html"` | no |
+| <a name="input_index_document"></a> [index\_document](#input\_index\_document) | Name of the index document. | `string` | `"index.html"` | no |
+| <a name="input_location"></a> [location](#input\_location) | Azure region for all resources. | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Name of the resource group to create. | `string` | n/a | yes |
+| <a name="input_site_name"></a> [site\_name](#input\_site\_name) | Base name for the static site resources. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to all resources. | `map(string)` | `{}` | no |
 
 ---
 
 ## Outputs
 
-| Name                 | Description                                               |
-|----------------------|-----------------------------------------------------------|
-| resource_group_name  | The name of the created resource group.                   |
-| storage_account_name | The name of the storage account hosting the static site.  |
-| static_website_url   | The primary web endpoint for the static website.          |
-| cdn_endpoint_url     | The CDN endpoint URL (if CDN is enabled).                 |
+| Name | Description |
+|------|-------------|
+| <a name="output_cdn_endpoint_url"></a> [cdn\_endpoint\_url](#output\_cdn\_endpoint\_url) | The CDN endpoint URL, if CDN is enabled. |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
+| <a name="output_static_website_url"></a> [static\_website\_url](#output\_static\_website\_url) | n/a |
+| <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name) | n/a |
 
 ---
 

@@ -1,0 +1,10 @@
+formatter: markdown table
+
+content: |-
+  {{ .Header }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+  {{ .Footer }}
