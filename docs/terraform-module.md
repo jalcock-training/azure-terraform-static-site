@@ -53,21 +53,21 @@ infra/
 +--------------------------------------------------------+
 
 | Terraform Module: static-site |
-| -------------------------------------------------------- |
-| Inputs: |
-| - name |
-| - location |
-| - resource_group_name |
-| - sku |
-| |
-| main.tf |
-| - azurerm_static_site |
-| - supporting config |
-| |
-| Outputs: |
-| - static_site_name |
-| - default_host_name |
-| - deployment_token |
+| ----------------------------- |
+| Inputs:                       |
+| - name                        |
+| - location                    |
+| - resource_group_name         |
+| - sku                         |
+|                               |
+| main.tf                       |
+| - azurerm_static_site         |
+| - supporting config           |
+|                               |
+| Outputs:                      |
+| - static_site_name            |
+| - default_host_name           |
+| - deployment_token            |
 
 ---
 
