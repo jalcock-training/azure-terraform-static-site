@@ -1,0 +1,20 @@
+name: Terraform Docs
+
+on:
+  pull_request:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Render terraform docs
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: infra/modules/static_site/
+          output-file: README.md
+          output-method: inject
+          git-push: 'false'
+          fail-on-diff: 'true'
