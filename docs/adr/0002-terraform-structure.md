@@ -23,12 +23,12 @@ The structure must support:
 
 All Terraform files live directly under `/infra` without modules.
 
-**Pros**
+### Pros - single root
 
 - Simple
 - Easy to understand for small projects
 
-**Cons**
+### Cons - single root
 
 - Harder to scale as more resources are added
 - No encapsulation or reuse
@@ -40,13 +40,13 @@ All Terraform files live directly under `/infra` without modules.
 
 A root module orchestrates one or more child modules (e.g., static site, networking, monitoring).
 
-**Pros**
+### Pros - multi-module
 
 - Highly scalable
 - Clean separation of concerns
 - Easy to extend with new modules
 
-**Cons**
+### Cons - multi-module
 
 - Overkill for Phase 1
 - More boilerplate
@@ -58,7 +58,7 @@ A root module orchestrates one or more child modules (e.g., static site, network
 
 A dedicated module encapsulates all resources for the static site. The root module is minimal and simply consumes this module.
 
-**Pros**
+### Pros - sinlge purpose module
 
 - Clean separation between app code and IaC
 - Encapsulates Azure Static Web App logic
@@ -66,7 +66,7 @@ A dedicated module encapsulates all resources for the static site. The root modu
 - Works well with CI/CD workflows
 - Keeps Phase 1 simple while enabling future growth
 
-**Cons**
+### Cons - sinlge purpose module
 
 - Slightly more structure than a flat `/infra` folder
 - Requires module documentation

@@ -74,7 +74,7 @@ A detailed CI/CD explanation will be added in `/docs/ci-cd.md`.
 
 ### Local Setup
 
-git clone git@github.com:<your-username>/azure-terraform-static-site.git
+git clone <git@github.com>:<your-username>/azure-terraform-static-site.git
 cd azure-terraform-static-site
 
 ---

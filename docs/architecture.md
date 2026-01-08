@@ -20,7 +20,7 @@ The solution consists of three major components:
    - Running Terraform linting, validation, and optional plan/apply
    - Enforcing formatting and security checks
 
-### Diagram
+### Diagram - High-Level Architecture
 
                           +-----------------------------+
                           |         GitHub Repo         |
@@ -109,7 +109,7 @@ infra/
 - Output values for CI/CD integration
 - Enforce formatting, linting, and security scanning via CI
 
-### Diagram
+### Diagram - Terraform Architecture
 
                      +-----------------------------+
                      |        Developer            |
@@ -175,7 +175,7 @@ GitHub Actions orchestrates the full deployment lifecycle.
 - `terraform validate`
 - Optional: `terraform plan` on PR, `apply` on merge
 
-### Diagram
+### Diagram - CI/CD Architecture
 
 For the full CI/CD pipeline architecture diagram, see the "CI/CD Pipeline" section in `/docs/architecture.md`.
 
