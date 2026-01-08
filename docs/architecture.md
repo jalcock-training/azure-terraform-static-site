@@ -20,8 +20,54 @@ The solution consists of three major components:
    - Running Terraform linting, validation, and optional plan/apply  
    - Enforcing formatting and security checks  
 
-### Diagram (placeholder)
-[ placeholder ]
+### Diagram
+
+                          +-----------------------------+
+                          |         GitHub Repo         |
+                          |-----------------------------|
+                          |  /src (static site code)    |
+                          |  /infra (Terraform module)  |
+                          |  /docs (architecture, etc.) |
+                          +--------------+--------------+
+                                         |
+                                         | Push / PR
+                                         v
+                          +-----------------------------+
+                          |       GitHub Actions        |
+                          |-----------------------------|
+                          |  Static Site Pipeline       |
+                          |    - Install deps           |
+                          |    - Build site             |
+                          |    - Deploy to Azure SWA    |
+                          |                             |
+                          |  Terraform Pipeline         |
+                          |    - fmt / validate         |
+                          |    - tflint / tfsec         |
+                          |    - plan (PR)              |
+                          |    - apply (main)           |
+                          +--------------+--------------+
+                                         |
+                                         | Deploy / Provision
+                                         v
+                   +------------------------------------------------+
+                   |             Azure Static Web App               |
+                   |------------------------------------------------|
+                   |  Global CDN (Front Door)                       |
+                   |  SSL / HTTPS                                   |
+                   |  Zero‑downtime deployments                     |
+                   |  Static content hosting                        |
+                   |  Optional API backend (future)                 |
+                   +------------------------------------------------+
+                                         |
+                                         | Serves content globally
+                                         v
+                          +-----------------------------+
+                          |         End Users           |
+                          |-----------------------------|
+                          |  Browser requests static    |
+                          |  content from global edge   |
+                          +-----------------------------+
+
 
 ---
 
@@ -51,7 +97,7 @@ Terraform is used to provision and manage the Azure Static Web App resource.
 ### Module Structure
 
 infra/
-└── static-site/
+├── static-site/
 ├── main.tf
 ├── variables.tf
 ├── outputs.tf
@@ -65,8 +111,51 @@ infra/
 - Output values for CI/CD integration  
 - Enforce formatting, linting, and security scanning via CI
 
-### Diagram (placeholder)
-[ placeholder ]
+### Diagram
+
+                     +-----------------------------+
+                     |        Developer            |
+                     |-----------------------------|
+                     |  Writes / updates .tf files |
+                     |  Runs fmt / validate locally|
+                     +--------------+--------------+
+                                    |
+                                    | git push / PR
+                                    v
+                     +-----------------------------+
+                     |       GitHub Actions        |
+                     |-----------------------------|
+                     |  Terraform Workflow         |
+                     |-----------------------------|
+                     |  1. terraform fmt -check    |
+                     |  2. tflint                  |
+                     |  3. tfsec                   |
+                     |  4. terraform validate      |
+                     |  5. terraform plan (PR)     |
+                     +--------------+--------------+
+                                    |
+                                    | PR approved & merged
+                                    v
+                     +-----------------------------+
+                     |       GitHub Actions        |
+                     |-----------------------------|
+                     |  Main Branch Workflow       |
+                     |-----------------------------|
+                     |  1. terraform init          |
+                     |  2. terraform plan          |
+                     |  3. terraform apply         |
+                     +--------------+--------------+
+                                    |
+                                    | Provision resources
+                                    v
+                     +-----------------------------+
+                     |        Azure Resource       |
+                     |-----------------------------|
+                     |  Static Web App             |
+                     |  Resource Group             |
+                     |  Supporting config          |
+                     +-----------------------------+
+
 
 
 ---
@@ -90,9 +179,8 @@ GitHub Actions orchestrates the full deployment lifecycle.
 - `terraform validate`  
 - Optional: `terraform plan` on PR, `apply` on merge  
 
-### Diagram (placeholder)
-[ placeholder ]
-
+### Diagram 
+For the full CI/CD pipeline architecture diagram, see the "CI/CD Pipeline" section in `/docs/architecture.md`.
 
 ---
 
