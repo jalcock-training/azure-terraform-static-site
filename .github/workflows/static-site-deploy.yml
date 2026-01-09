@@ -1,0 +1,45 @@
+name: Static Site Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure src folder exists
+        run: test -d src
+
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Select environment
+        run: |
+          if [[ "${GITHUB_REF##*/}" == "main" ]]; then
+            echo "STORAGE_ACCOUNT_NAME=staticsitejaprod01" >> $GITHUB_ENV
+          else
+            echo "STORAGE_ACCOUNT_NAME=staticsitejadev01" >> $GITHUB_ENV
+          fi
+
+      - name: Upload static site to $web
+        run: |
+          az storage blob upload-batch \
+            --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
+            --destination '$web' \
+            --source src \
+            --overwrite

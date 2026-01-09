@@ -4,6 +4,6 @@ terraform {
     resource_group_name  = "rg-tfstate"
     storage_account_name = "tfstatejames123"
     container_name       = "tfstate"
-    key                  = "staticsite-dev.tfstate"
+    key                  = "staticsite-prod.tfstate"
   }
 }
