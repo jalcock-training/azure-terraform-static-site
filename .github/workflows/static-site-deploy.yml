@@ -3,6 +3,7 @@ name: Static Site Deploy
 on:
   push:
     branches:
+      - dev
       - main
   pull_request:
 
@@ -35,6 +36,11 @@ jobs:
           else
             echo "STORAGE_ACCOUNT_NAME=staticsitejadev01" >> $GITHUB_ENV
           fi
+
+      - name: Inject build timestamp
+        run: |
+          ts="$(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+          sed -i "s/BUILD_TIMESTAMP/$ts/g" src/index.html
 
       - name: Upload static site to $web
         run: |
