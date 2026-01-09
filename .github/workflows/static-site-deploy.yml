@@ -31,9 +31,9 @@ jobs:
       - name: Select environment
         run: |
           if [[ "${GITHUB_REF##*/}" == "main" ]]; then
-            echo "STORAGE_ACCOUNT_NAME=staticsiteprod" >> $GITHUB_ENV
+            echo "STORAGE_ACCOUNT_NAME=staticsitejaprod01" >> $GITHUB_ENV
           else
-            echo "STORAGE_ACCOUNT_NAME=staticsitedev" >> $GITHUB_ENV
+            echo "STORAGE_ACCOUNT_NAME=staticsitejadev01" >> $GITHUB_ENV
           fi
 
       - name: Upload static site to $web
