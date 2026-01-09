@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,11 +18,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Optional sanity check
       - name: Ensure src folder exists
         run: test -d src
 
-      # Login to Azure using OIDC
       - name: Azure Login (OIDC)
         uses: azure/login@v2
         with:
@@ -26,7 +28,6 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Set the correct storage account name based on branch
       - name: Select environment
         run: |
           if [[ "${GITHUB_REF##*/}" == "main" ]]; then
@@ -35,7 +36,6 @@ jobs:
             echo "STORAGE_ACCOUNT_NAME=staticsitedev" >> $GITHUB_ENV
           fi
 
-      # Upload static site to the $web container
       - name: Upload static site to $web
         run: |
           az storage blob upload-batch \
