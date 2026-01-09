@@ -65,8 +65,3 @@ variable "error_document" {
   }
 }
 
-variable "enable_cdn" {
-  type        = bool
-  description = "Whether to deploy a CDN endpoint for the static site."
-  default     = false
-}

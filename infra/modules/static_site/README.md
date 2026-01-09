@@ -65,8 +65,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_cdn_endpoint.cdn_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_endpoint) | resource |
-| [azurerm_cdn_profile.cdn](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_profile) | resource |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_storage_account.sa](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_account_static_website.static](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_static_website) | resource |
@@ -75,7 +73,6 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_enable_cdn"></a> [enable\_cdn](#input\_enable\_cdn) | Whether to deploy a CDN endpoint for the static site. | `bool` | `false` | no |
 | <a name="input_error_document"></a> [error\_document](#input\_error\_document) | Name of the error document. | `string` | `"404.html"` | no |
 | <a name="input_index_document"></a> [index\_document](#input\_index\_document) | Name of the index document. | `string` | `"index.html"` | no |
 | <a name="input_location"></a> [location](#input\_location) | Azure region for all resources. | `string` | n/a | yes |
@@ -87,7 +84,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cdn_endpoint_url"></a> [cdn\_endpoint\_url](#output\_cdn\_endpoint\_url) | The CDN endpoint URL, if CDN is enabled. |
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | n/a |
 | <a name="output_static_website_url"></a> [static\_website\_url](#output\_static\_website\_url) | n/a |
 | <a name="output_storage_account_name"></a> [storage\_account\_name](#output\_storage\_account\_name) | n/a |
