@@ -18,11 +18,28 @@ jobs:
       - name: Ensure src folder exists
         run: test -d src
 
-      - name: Deploy to Azure Static Web Apps
-        uses: azure/static-web-apps-deploy@v1
+      # Login to Azure using OIDC
+      - name: Azure Login (OIDC)
+        uses: azure/login@v2
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_TOKEN }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: 'upload'
-          app_location: 'src'
-          output_location: '' # no build step
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # Set the correct storage account name based on branch
+      - name: Select environment
+        run: |
+          if [[ "${GITHUB_REF##*/}" == "main" ]]; then
+            echo "STORAGE_ACCOUNT_NAME=staticsiteprod" >> $GITHUB_ENV
+          else
+            echo "STORAGE_ACCOUNT_NAME=staticsitedev" >> $GITHUB_ENV
+          fi
+
+      # Upload static site to the $web container
+      - name: Upload static site to $web
+        run: |
+          az storage blob upload-batch \
+            --account-name ${{ env.STORAGE_ACCOUNT_NAME }} \
+            --destination '$web' \
+            --source src \
+            --overwrite
