@@ -26,7 +26,7 @@ The high-level architecture includes:
 
 - Azure Storage Accounts (dev + prod):
   Used for static website hosting via the $web container.
-- Terraform: 
+- Terraform:
   Manages all infrastructure, including resource groups, storage accounts, and RBAC.
 - GitHub Actions (build and deployment pipeline)
   - Static site deployment pipeline
@@ -42,11 +42,11 @@ A full architecture diagram will be added in `/docs/architecture.md`.
 
 ## Repository Structure
 
-/src                 # Static website source code
-/terraform           # Terraform configuration and modules
-/docs                # Architecture diagrams, ADRs, documentation
-.github/workflows    # CI/CD pipelines (Terraform + static site deploy)
-/test                # Optional tests or linting configs
+/src # Static website source code
+/terraform # Terraform configuration and modules
+/docs # Architecture diagrams, ADRs, documentation
+.github/workflows # CI/CD pipelines (Terraform + static site deploy)
+/test # Optional tests or linting configs
 
 ---
 
@@ -56,7 +56,7 @@ A full architecture diagram will be added in `/docs/architecture.md`.
 - **Terraform (with tflint, Trivy, terraform-docs)**
 - **GitHub Actions (OIDC authentication)**
 - **HTML/CSS/JS static site**
-- **Azure CLI** 
+- **Azure CLI**
 
 ---
 

@@ -99,27 +99,27 @@ Terraform apply is intentionally a **stretch task** and not implemented.
 ## 5. Pipeline Architecture Diagram
 
 Developer Push / PR
-        |
-        v
+|
+v
 +-----------------------------+
-|       GitHub Actions        |
+| GitHub Actions |
 +-----------------------------+
-|  Terraform CI Pipeline      |
-|    - fmt                    |
-|    - validate               |
-|    - tflint                 |
-|    - Trivy IaC scan         |
+| Terraform CI Pipeline |
+| - fmt |
+| - validate |
+| - tflint |
+| - Trivy IaC scan |
 +-----------------------------+
-|  Static Site Pipeline       |
-|    - Build site             |
-|    - Inject timestamp       |
-|    - Upload to $web         |
+| Static Site Pipeline |
+| - Build site |
+| - Inject timestamp |
+| - Upload to $web |
 +-----------------------------+
-        |
-        v
+|
+v
 +-----------------------------+
-|        Azure Storage        |
-|  (Static Website Hosting)   |
+| Azure Storage |
+| (Static Website Hosting) |
 +-----------------------------+
 
 ---

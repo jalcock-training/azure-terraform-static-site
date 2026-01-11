@@ -90,7 +90,7 @@ Resource Group
 └── Static Website ($web)
 
 
-The `$web` container is automatically created and configured by the  
+The `$web` container is automatically created and configured by the
 `azurerm_storage_account_static_website` resource.
 
 ---
@@ -124,14 +124,15 @@ This ensures consistent, predictable naming across environments.
 
 ## Future Enhancements (Stretch Ideas)
 
-- Optional CDN or Front Door integration  
-- Custom domain + HTTPS support  
-- Diagnostic settings for Storage Account  
-- Private endpoints for internal hosting  
-- Role assignments for CI/CD identities  
+- Optional CDN or Front Door integration
+- Custom domain + HTTPS support
+- Diagnostic settings for Storage Account
+- Private endpoints for internal hosting
+- Role assignments for CI/CD identities
 
 ---
 
 ## License
 
 See the repository LICENSE file.
+```
