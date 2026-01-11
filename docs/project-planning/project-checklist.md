@@ -6,14 +6,16 @@ A structured, end‑to‑end plan for delivering an Azure static website using T
 
 ## PHASE 1 — Project Foundation
 
-### Repository initialization  
+### Repository initialization
+
 [x] Create public repo  
 [x] Add .gitignore, LICENSE, README  
 [x] Add .editorconfig  
 [x] Establish base folder structure  
-[x] Enable Issues and PRs  
+[x] Enable Issues and PRs
 
-### Workflow governance  
+### Workflow governance
+
 [x] Configure branch protection for main  
 [x] Require PR reviews  
 [x] Add PR template  
@@ -24,92 +26,104 @@ A structured, end‑to‑end plan for delivering an Azure static website using T
 
 ## PHASE 2 — Architecture & Documentation
 
-### Architecture  
+### Architecture
+
 [x] High‑level architecture diagram  
 [x] Terraform workflow diagram  
-[x] CI/CD pipeline diagram  
+[x] CI/CD pipeline diagram
 
-### Documentation  
+### Documentation
+
 [x] /docs/architecture.md  
 [x] /docs/ci-cd.md  
 [x] /docs/terraform-module.md  
 [x] ADR: hosting choice  
-[x] ADR: Terraform structure  
+[x] ADR: Terraform structure
 
 ---
 
 ## PHASE 3 — Static Website
 
-### Website  
+### Website
+
 [x] Scaffold site (HTML/CSS)  
 [x] Implement layout + content  
-[x] Add footer with build timestamp  
+[x] Add footer with build timestamp
 
-### Quality  
+### Quality
+
 [x] Add formatting/linting (Prettier, markdownlint)  
-[x] Optional tests  
+[x] Optional tests
 
 ---
 
 ## PHASE 4 — Terraform Infrastructure
 
-### Module  
+### Module
+
 [x] main.tf  
 [x] variables.tf  
 [x] outputs.tf  
-[x] versions.tf  
+[x] versions.tf
 
-### Best practices  
+### Best practices
+
 [x] tflint  
 [x] tfsec  
 [x] terraform-docs  
-[x] terraform fmt enforcement  
+[x] terraform fmt enforcement
 
-### Validation  
+### Validation
+
 [x] terraform init  
 [x] terraform validate  
-[x] terraform plan  
+[x] terraform plan
 
 ---
 
 ## PHASE 5 — CI/CD Automation (OIDC + Storage Account)
 
-### Static site pipeline  
+### Static site pipeline
+
 [x] GitHub Actions workflow for static site  
 [x] OIDC authentication (no secrets)  
 [x] Branch‑based environment selection (dev → dev site, main → prod site)  
 [x] Inject build timestamp  
 [x] Upload to $web using Azure CLI + RBAC  
 [x] PR workflows validated (no deploy on PR)  
-[x] Dev → main promotion path working  
+[x] Dev → main promotion path working
 
-### Terraform pipeline  
+### Terraform pipeline
+
 [x] Add Terraform CI workflow  
 [x] Run terraform fmt in CI  
 [x] Run tflint in CI  
 [x] Run IaC security scan in CI (Trivy)  
 [x] Run terraform validate in CI  
 [ ] Optional: Terraform plan on PR  
-[ ] Optional: Terraform apply on merge to dev/main  
+[ ] Optional: Terraform apply on merge to dev/main
 
-### Identity & security  
+### Identity & security
+
 [x] OIDC federated credentials for dev, main, and PRs  
 [x] RBAC roles assigned (Contributor + Storage Blob Data Contributor)  
-[x] No long‑lived secrets required  
+[x] No long‑lived secrets required
 
 ---
 
 ## PHASE 6 — Deployment & Validation
 
-### Deployment  
+### Deployment
+
 [x] Deploy infrastructure (dev + prod)  
 [x] Deploy static site (dev + prod)  
-[x] Confirm branch‑based deployments work end‑to‑end  
+[x] Confirm branch‑based deployments work end‑to‑end
 
-### Validation  
+### Validation
+
 [x] Confirm HTTPS works (Storage Account static sites)  
 [ ] Optional: Add custom domain  
-[ ] Optional: Add availability/smoke tests  
+[ ] Optional: Add availability/smoke tests
 
 ---
 
