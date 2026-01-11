@@ -1,6 +1,7 @@
 # CI/CD Pipeline Overview
 
-This document describes the continuous integration and continuous delivery (CI/CD) workflows used in this project. The pipelines ensure code quality, enforce governance, and automate deployment of both the static website and the Terraform-managed Azure resources.
+This document describes the continuous integration and continuous delivery (CI/CD) workflows used in this project.  
+The pipelines ensure code quality, enforce governance, and automate deployment of the static website hosted in Azure Storage Account Static Website Hosting.
 
 ---
 
@@ -10,94 +11,116 @@ The CI/CD system is designed to:
 
 - Validate all code before it reaches `main`
 - Enforce formatting, linting, and security standards
-- Provide preview environments for pull requests
-- Automate deployment of the static site
-- Automate provisioning of Azure resources using Terraform
+- Deploy the static site automatically to dev and prod environments
+- Validate Terraform infrastructure using modern IaC tooling
 - Maintain a clean, auditable, and repeatable delivery process
+- Use OIDC authentication (no secrets in CI/CD)
 
 ---
 
-## 2. High-Level Pipeline Structure
+## 2. High‑Level Pipeline Structure
 
 The project uses two parallel pipelines:
 
-1. **Static Site Pipeline**  
-   Builds and deploys the static website to Azure Static Web Apps.
+1. **Static Site Deployment Pipeline**  
+   Builds the static site, injects a timestamp, and uploads it to the `$web` container of the appropriate Storage Account.
 
-2. **Terraform Pipeline**  
-   Validates, plans, and applies infrastructure changes.
+2. **Terraform CI Pipeline**  
+   Validates Terraform code using formatting, linting, and security scanning.
 
-Both pipelines run on pull requests and on merges to `main`, with different behaviours depending on the event.
+Both pipelines run on pull requests and on merges to `dev` or `main`, with different behaviours depending on the branch.
 
 ---
 
 ## 3. Static Site Pipeline
 
-### Trigger Conditions - Static Site Pipeline
+### Trigger Conditions – Static Site Pipeline
 
-- Pull requests targeting `main`
+- Pushes to `dev`
 - Pushes to `main`
 
-### PR Behaviour - Static Site Pipeline
+### Behaviour – Static Site Pipeline
 
-- Install dependencies
+- Install dependencies (if applicable)
 - Build the static site
-- Run linters and formatting checks
-- Deploy to an **Azure Static Web Apps preview environment**  
-  (isolated environment tied to the PR)
+- Inject a build timestamp into the footer
+- Authenticate to Azure using OIDC
+- Upload the built site to the `$web` container of:
+  - **dev** Storage Account (when pushing to `dev`)
+  - **prod** Storage Account (when pushing to `main`)
 
-### Main Branch Behaviour - Static Site Pipeline
-
-- Install dependencies
-- Build the static site
-- Deploy to **production** Azure Static Web Apps environment
-- Zero‑downtime deployment via Azure Front Door
-
-### Responsibilities - Static Site Pipeline
+### Responsibilities – Static Site Pipeline
 
 - Ensure the site builds cleanly
-- Provide reviewers with a live preview
-- Deploy automatically after merge
+- Provide automatic deployments for both environments
+- Maintain a simple, predictable promotion flow (`dev` → `main`)
+
+There are **no preview environments** and **no Azure Static Web Apps** involved.
 
 ---
 
 ## 4. Terraform Pipeline
 
-### Trigger Conditions - Terraform Pipeline
+### Trigger Conditions – Terraform Pipeline
 
-- Pull requests targeting `main`
+- Pull requests targeting any branch
 - Pushes to `main`
 
-### PR Behaviour - Terraform Pipeline
+### PR Behaviour – Terraform Pipeline
 
 - `terraform fmt -check`
 - `tflint`
-- `tfsec`
+- `trivy` (IaC misconfiguration scan)
 - `terraform validate`
-- `terraform plan` (read‑only)
-- No changes applied
 
+No plan or apply is executed.  
 This ensures infrastructure changes are safe, secure, and reviewable.
 
-### Main Branch Behaviour - Terraform Pipeline
+### Main Branch Behaviour – Terraform Pipeline
 
-- `terraform init`
-- `terraform plan`
-- `terraform apply`
+Same as PR behaviour:
 
-This applies infrastructure changes automatically after merge.
+- `terraform fmt -check`
+- `tflint`
+- `trivy`
+- `terraform validate`
 
-### Responsibilities - Terraform Pipeline
+There is **no automatic plan/apply**.  
+Terraform apply is intentionally a **stretch task** and not implemented.
+
+### Responsibilities – Terraform Pipeline
 
 - Enforce IaC quality and security
 - Prevent misconfigurations from reaching production
-- Provide a clear audit trail for all infrastructure changes
+- Maintain a clean, auditable Terraform workflow without auto‑apply
 
 ---
 
 ## 5. Pipeline Architecture Diagram
 
-[placeholder]
+Developer Push / PR
+        |
+        v
++-----------------------------+
+|       GitHub Actions        |
++-----------------------------+
+|  Terraform CI Pipeline      |
+|    - fmt                    |
+|    - validate               |
+|    - tflint                 |
+|    - Trivy IaC scan         |
++-----------------------------+
+|  Static Site Pipeline       |
+|    - Build site             |
+|    - Inject timestamp       |
+|    - Upload to $web         |
++-----------------------------+
+        |
+        v
++-----------------------------+
+|        Azure Storage        |
+|  (Static Website Hosting)   |
++-----------------------------+
 
 ---
 
@@ -111,24 +134,28 @@ The CI/CD system enforces:
 - **Automated linting and security scanning**
 - **Consistent formatting via `.editorconfig`**
 - **Small, focused PRs**
+- **Zero secrets** (OIDC authentication)
 
 These controls ensure the project remains maintainable, secure, and professional.
 
 ---
 
-## 7. Future Enhancements
+## 7. Future Enhancements (Stretch Tasks)
 
-Planned improvements include:
+These are intentionally not implemented:
 
+- Terraform plan on PR
+- Terraform apply automation
+- Remote Terraform backend (Azure Storage + Key Vault)
 - CodeQL security scanning
-- Dependabot for dependency updates
-- Terraform state backend (Azure Storage + Key Vault)
+- Dependabot
+- CDN or Front Door integration
 - Staging environments
 - Canary deployments
-- More granular workflows (e.g., docs-only pipeline)
 
 ---
 
 ## 8. Summary
 
-The CI/CD system provides a modern, automated, and secure delivery pipeline for both the static website and the Terraform-managed infrastructure. It ensures that every change is validated, reviewed, and deployed consistently, supporting a clean and professional engineering workflow.
+The CI/CD system provides a clean, modern, and secure delivery pipeline for both the static website and the Terraform infrastructure.  
+It ensures that every change is validated, reviewed, and deployed consistently, supporting a professional and maintainable engineering workflow.
