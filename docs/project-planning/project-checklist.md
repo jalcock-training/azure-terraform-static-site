@@ -100,8 +100,8 @@ A structured, end‑to‑end plan for delivering an Azure static website using T
 [x] Run tflint in CI  
 [x] Run IaC security scan in CI (Trivy)  
 [x] Run terraform validate in CI  
-[ ] Optional: Terraform plan on PR  
-[ ] Optional: Terraform apply on merge to dev/main
+[ ] Stretch: Terraform plan on PR  
+[ ] Stretch: Terraform apply on merge to dev/main
 
 ### Identity & security
 
@@ -122,14 +122,13 @@ A structured, end‑to‑end plan for delivering an Azure static website using T
 ### Deployment Validation
 
 [x] Confirm HTTPS works (Storage Account static sites)  
-[ ] Optional: Add custom domain  
-[ ] Optional: Add availability/smoke tests
+[ ] Stretch: Add custom domain  
+[ ] Stretch: Add availability/smoke tests
 
 ---
 
 ## PHASE 7 — Polish
 
-[ ] Add screenshots (site, pipelines, diagrams)  
 [ ] Finalize README with architecture + pipeline explanation  
 [ ] Add GitHub topics/tags  
 [ ] Clean commit history (squash, conventional commits)
