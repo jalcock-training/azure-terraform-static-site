@@ -73,7 +73,7 @@ A structured, end‑to‑end plan for delivering an Azure static website using T
 [x] terraform-docs  
 [x] terraform fmt enforcement
 
-### Validation
+### Terraform Infrastructure Validation
 
 [x] terraform init  
 [x] terraform validate  
@@ -119,7 +119,7 @@ A structured, end‑to‑end plan for delivering an Azure static website using T
 [x] Deploy static site (dev + prod)  
 [x] Confirm branch‑based deployments work end‑to‑end
 
-### Validation
+### Deployment Validation
 
 [x] Confirm HTTPS works (Storage Account static sites)  
 [ ] Optional: Add custom domain  
